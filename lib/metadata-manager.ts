@@ -1,18 +1,18 @@
-import { create } from "ipfs-http-client"
+import { uploadMetadataToIPFS, uploadImageToIPFS } from "./ipfs-client"
 
 const projectId = process.env.NEXT_PUBLIC_IPFS_PROJECT_ID
 const projectSecret = process.env.NEXT_PUBLIC_IPFS_PROJECT_SECRET
 
 const auth = "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64")
 
-const ipfs = create({
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https",
-  headers: {
-    authorization: auth,
-  },
-})
+// const ipfs = create({
+//   host: "ipfs.infura.io",
+//   port: 5001,
+//   protocol: "https",
+//   headers: {
+//     authorization: auth,
+//   },
+// })
 
 export interface NFTMetadata {
   name: string
@@ -31,23 +31,11 @@ export interface NFTMetadata {
 
 export class MetadataManager {
   static async uploadToIPFS(data: any): Promise<string> {
-    try {
-      const result = await ipfs.add(JSON.stringify(data, null, 2))
-      return `https://ipfs.infura.io/ipfs/${result.path}`
-    } catch (error) {
-      console.error("IPFS upload error:", error)
-      throw new Error("Failed to upload to IPFS")
-    }
+    return await uploadMetadataToIPFS(data)
   }
 
   static async uploadImageToIPFS(imageFile: File): Promise<string> {
-    try {
-      const result = await ipfs.add(imageFile)
-      return `https://ipfs.infura.io/ipfs/${result.path}`
-    } catch (error) {
-      console.error("Image upload error:", error)
-      throw new Error("Failed to upload image to IPFS")
-    }
+    return await uploadImageToIPFS(imageFile)
   }
 
   static generateMetadata(tier: "GENESIS" | "GOLD" | "LEGENDARY", level = 1, xp = 0, tokenId?: number): NFTMetadata {

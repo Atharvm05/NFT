@@ -1,3 +1,5 @@
+"use client"
+
 import { AdminDashboard } from "@/components/admin-dashboard"
 import { WalletConnect } from "@/components/wallet-connect"
 

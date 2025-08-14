@@ -1,3 +1,5 @@
+"use client"
+
 import { BenefitsHub } from "@/components/benefits-hub"
 import { WalletConnect } from "@/components/wallet-connect"
 

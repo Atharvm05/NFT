@@ -1,22 +1,29 @@
-let ipfsClient: any = null
+const ipfsClient: any = null
 
-// Initialize IPFS client only in browser environment
 const initIPFS = async () => {
   if (typeof window === "undefined") return null
 
   try {
-    const { create } = await import("ipfs-http-client")
+    const ipfsModule = await import("ipfs-http-client").catch(() => null)
+    if (!ipfsModule) return null
+
+    const { create } = ipfsModule
 
     const projectId = process.env.NEXT_PUBLIC_IPFS_PROJECT_ID
     const projectSecret = process.env.NEXT_PUBLIC_IPFS_PROJECT_SECRET
 
-    const auth = projectId && projectSecret ? "Basic " + btoa(projectId + ":" + projectSecret) : undefined
+    if (!projectId || !projectSecret) {
+      console.warn("IPFS credentials not found, using fallback")
+      return null
+    }
+
+    const auth = "Basic " + btoa(projectId + ":" + projectSecret)
 
     return create({
       host: "ipfs.infura.io",
       port: 5001,
       protocol: "https",
-      headers: auth ? { authorization: auth } : undefined,
+      headers: { authorization: auth },
     })
   } catch (error) {
     console.error("Failed to initialize IPFS client:", error)
@@ -41,17 +48,24 @@ export interface NFTMetadata {
 }
 
 export async function uploadMetadataToIPFS(metadata: NFTMetadata): Promise<string> {
-  if (!ipfsClient) {
-    ipfsClient = await initIPFS()
-  }
-
-  if (!ipfsClient) {
-    throw new Error("IPFS client not available")
-  }
-
   try {
-    const result = await ipfsClient.add(JSON.stringify(metadata, null, 2))
-    return `https://ipfs.io/ipfs/${result.cid.toString()}`
+    const response = await fetch("/api/ipfs/upload", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: metadata,
+        type: "json",
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to upload to IPFS")
+    }
+
+    const result = await response.json()
+    return result.url
   } catch (error) {
     console.error("Error uploading to IPFS:", error)
     throw new Error("Failed to upload metadata to IPFS")
@@ -59,17 +73,31 @@ export async function uploadMetadataToIPFS(metadata: NFTMetadata): Promise<strin
 }
 
 export async function uploadImageToIPFS(imageFile: File): Promise<string> {
-  if (!ipfsClient) {
-    ipfsClient = await initIPFS()
-  }
-
-  if (!ipfsClient) {
-    throw new Error("IPFS client not available")
-  }
-
   try {
-    const result = await ipfsClient.add(imageFile)
-    return `https://ipfs.io/ipfs/${result.cid.toString()}`
+    // Convert file to base64 for API transmission
+    const fileData = await new Promise<string>((resolve) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.readAsDataURL(imageFile)
+    })
+
+    const response = await fetch("/api/ipfs/upload", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: fileData,
+        type: "file",
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to upload image to IPFS")
+    }
+
+    const result = await response.json()
+    return result.url
   } catch (error) {
     console.error("Error uploading image to IPFS:", error)
     throw new Error("Failed to upload image to IPFS")

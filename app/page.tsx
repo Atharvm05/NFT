@@ -1,3 +1,5 @@
+"use client"
+
 import { WalletConnect } from "@/components/wallet-connect"
 import { HeroSection } from "@/components/hero"
 import { Features } from "@/components/features"
