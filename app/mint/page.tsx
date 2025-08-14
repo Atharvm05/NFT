@@ -1,3 +1,5 @@
+"use client"
+
 import { RealMintingInterface } from "@/components/real-minting-interface"
 import { WalletConnect } from "@/components/wallet-connect"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import { RealProgressionSystem } from "@/components/real-progression-system"
 import { WalletConnect } from "@/components/wallet-connect"
 

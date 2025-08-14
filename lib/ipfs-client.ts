@@ -1,18 +1,28 @@
-import { create } from "ipfs-http-client"
+let ipfsClient: any = null
 
-// Using Infura IPFS gateway - you'll need to set up your own IPFS node or use a service
-const projectId = process.env.NEXT_PUBLIC_IPFS_PROJECT_ID
-const projectSecret = process.env.NEXT_PUBLIC_IPFS_PROJECT_SECRET
+// Initialize IPFS client only in browser environment
+const initIPFS = async () => {
+  if (typeof window === "undefined") return null
 
-const auth =
-  projectId && projectSecret ? "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64") : undefined
+  try {
+    const { create } = await import("ipfs-http-client")
 
-export const ipfsClient = create({
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https",
-  headers: auth ? { authorization: auth } : undefined,
-})
+    const projectId = process.env.NEXT_PUBLIC_IPFS_PROJECT_ID
+    const projectSecret = process.env.NEXT_PUBLIC_IPFS_PROJECT_SECRET
+
+    const auth = projectId && projectSecret ? "Basic " + btoa(projectId + ":" + projectSecret) : undefined
+
+    return create({
+      host: "ipfs.infura.io",
+      port: 5001,
+      protocol: "https",
+      headers: auth ? { authorization: auth } : undefined,
+    })
+  } catch (error) {
+    console.error("Failed to initialize IPFS client:", error)
+    return null
+  }
+}
 
 export interface NFTMetadata {
   name: string
@@ -31,6 +41,14 @@ export interface NFTMetadata {
 }
 
 export async function uploadMetadataToIPFS(metadata: NFTMetadata): Promise<string> {
+  if (!ipfsClient) {
+    ipfsClient = await initIPFS()
+  }
+
+  if (!ipfsClient) {
+    throw new Error("IPFS client not available")
+  }
+
   try {
     const result = await ipfsClient.add(JSON.stringify(metadata, null, 2))
     return `https://ipfs.io/ipfs/${result.cid.toString()}`
@@ -41,6 +59,14 @@ export async function uploadMetadataToIPFS(metadata: NFTMetadata): Promise<strin
 }
 
 export async function uploadImageToIPFS(imageFile: File): Promise<string> {
+  if (!ipfsClient) {
+    ipfsClient = await initIPFS()
+  }
+
+  if (!ipfsClient) {
+    throw new Error("IPFS client not available")
+  }
+
   try {
     const result = await ipfsClient.add(imageFile)
     return `https://ipfs.io/ipfs/${result.cid.toString()}`

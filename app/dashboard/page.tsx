@@ -1,3 +1,5 @@
+"use client"
+
 import { RealDashboard } from "@/components/real-dashboard"
 import { GatedAccessChecker } from "@/components/gated-access-checker"
 

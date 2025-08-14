@@ -2,13 +2,22 @@ import { createConfig, http } from "wagmi"
 import { polygon, polygonAmoy } from "wagmi/chains"
 import { injected, walletConnect } from "wagmi/connectors"
 
+const getWalletConnectProjectId = () => {
+  if (typeof window === "undefined") return ""
+  return process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || ""
+}
+
 export const config = createConfig({
   chains: [polygon, polygonAmoy],
   connectors: [
     injected(),
-    walletConnect({
-      projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
-    }),
+    ...(getWalletConnectProjectId()
+      ? [
+          walletConnect({
+            projectId: getWalletConnectProjectId(),
+          }),
+        ]
+      : []),
   ],
   transports: {
     [polygon.id]: http(),
@@ -18,7 +27,9 @@ export const config = createConfig({
 })
 
 // Smart Contract Configuration
-export const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x${string}`
+export const NFT_CONTRACT_ADDRESS = (
+  typeof window !== "undefined" ? process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS : ""
+) as `0x${string}`
 
 export const NFT_CONTRACT_ABI = [
   {
