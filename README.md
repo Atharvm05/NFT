@@ -1,56 +1,30 @@
-# 🎟 NFT Access Passport
+# NFT Access Passport
 
-An evolving NFT-based access system that unlocks **exclusive online & offline experiences**.  
-Built for the **Gated NFTs University Hackathon**.
+*Automatically synced with your [v0.app](https://v0.app) deployments*
 
-## 🚀 Features
-- 🔑 **Token-gated access** — Unlock hidden pages, Discord channels, or real-world events.
-- 🌀 **Dynamic NFTs** — Your NFT evolves as you complete challenges or attend events.
-- ⚡ **Polygon blockchain** — Fast & eco-friendly transactions.
-- 🔗 **WalletConnect / RainbowKit** — Connect with MetaMask, WalletConnect, Coinbase Wallet, and more.
-- 🛠 **Thirdweb SDK integration** — Easy NFT minting & contract interaction.
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/atharvmahajan2005-gmailcoms-projects/v0-nft-access-passport)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/aDftt7drSoR)
 
-## 🛠 Tech Stack
-- **Frontend:** Next.js, TailwindCSS
-- **Blockchain:** Polygon (ERC-721)
-- **NFT Management:** Thirdweb SDK
-- **Wallet Integration:** WalletConnect / RainbowKit
-- **Smart Contract:** Solidity + OpenZeppelin
+## Overview
 
-## 📦 Getting Started
+This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
 
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/Atharvm05/NFT.git
-cd NFT
-```
+## Deployment
 
-### 2️⃣ Install dependencies
-```bash
-npm install
-```
+Your project is live at:
 
-### 3️⃣ Create `.env.local` file
-```env
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
-NEXT_PUBLIC_NFT_CONTRACT_ADDRESS=0xYourNFTContractAddress
-```
-- **`NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`** → Get from [WalletConnect Cloud](https://cloud.walletconnect.com)
-- **`NEXT_PUBLIC_NFT_CONTRACT_ADDRESS`** → Your deployed NFT contract address (Polygon)
+**[https://vercel.com/atharvmahajan2005-gmailcoms-projects/v0-nft-access-passport](https://vercel.com/atharvmahajan2005-gmailcoms-projects/v0-nft-access-passport)**
 
-### 4️⃣ Run locally
-```bash
-npm run dev
-```
-Visit: [http://localhost:3000](http://localhost:3000)
+## Build your app
 
-## 📜 Smart Contract
-- **Network:** Polygon Mainnet or Mumbai Testnet  
-- **Standard:** ERC-721  
-- Deployed using Thirdweb / Remix / Hardhat  
-- Contract address must match your `.env.local` value.
+Continue building your app on:
 
+**[https://v0.app/chat/projects/aDftt7drSoR](https://v0.app/chat/projects/aDftt7drSoR)**
 
+## How It Works
 
-## 📄 License
-MIT License
+1. Create and modify your project using [v0.app](https://v0.app)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
