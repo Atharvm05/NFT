@@ -1,30 +1,109 @@
-# NFT Access Passport
+# 🚀 NFT Access Passport – Your All-in-One Web3 Membership
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+NFT Access Passport is a **multi-layered gated NFT** that acts as a **dynamic digital passport** for both Web3 and real-world benefits. Unlike static NFTs, this passport **evolves as users engage**, unlocking new rewards, perks, and experiences.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/atharvmahajan2005-gmailcoms-projects/v0-nft-access-passport)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/aDftt7drSoR)
+---
 
-## Overview
+## ✨ Core Idea
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+NFT Access Passport provides both **online** and **real-world perks**:
 
-## Deployment
+- 🔑 **Exclusive Online Access**
+  - Discord channels, private forums, webinars, and courses  
+- 🎉 **Physical Benefits**
+  - Event entry, local meetups, partner store discounts  
+- 🕹 **Gamified Progression**
+  - NFT upgrades as you engage more with the ecosystem  
 
-Your project is live at:
+Instead of a **static NFT**, it **evolves with you** — completing challenges, attending events, or referring friends will **level up your NFT**, unlocking **new tiers of benefits**.
 
-**[https://vercel.com/atharvmahajan2005-gmailcoms-projects/v0-nft-access-passport](https://vercel.com/atharvmahajan2005-gmailcoms-projects/v0-nft-access-passport)**
+---
 
-## Build your app
+## ⚡ Tech Stack
 
-Continue building your app on:
+| Layer                  | Technology |
+|-------------------------|------------|
+| **Frontend**           | Next.js + Tailwind (fast, clean UI) |
+| **Blockchain**         | Polygon (cheap, eco-friendly) |
+| **NFT Management**     | Gated + BitBadges API |
+| **Authentication**     | WalletConnect / RainbowKit |
+| **Dynamic Metadata**   | Stored on IPFS, updated via server-side API calls |
 
-**[https://v0.app/chat/projects/aDftt7drSoR](https://v0.app/chat/projects/aDftt7drSoR)**
+---
 
-## How It Works
+## 📂 Project Structure
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+├── frontend/ # Next.js + Tailwind frontend
+├── contracts/ # Smart contracts for NFT logic
+├── api/ # Server-side API for metadata updates
+├── utils/ # Helper functions
+└── public/ # Static assets
+
+
+---
+
+## 🔧 Getting Started
+
+### ✅ Prerequisites
+- Node.js (v18+)
+- pnpm or npm
+- Wallet (MetaMask / Rainbow Wallet)
+
+### ⚙️ Installation
+```bash
+# Clone the repository
+git clone https://github.com/Atharvm05/NFT.git
+cd NFT
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+▶️ Running Locally
+
+    Open http://localhost:3000 in your browser
+
+    Connect your wallet with WalletConnect / RainbowKit
+
+    Mint or upgrade your NFT Access Passport
+
+🌍 Use Cases
+
+    Community Access → Exclusive Discord, forums, private groups
+
+    Learning & Events → Webinars, courses, conferences
+
+    Real-World Benefits → Partner discounts, IRL meetups, event tickets
+
+    Gamification → Achievement-based rewards & evolving NFTs
+
+🤝 Contributing
+
+We ❤️ contributions!
+
+    Fork the repo
+
+    Create a new branch
+
+    Submit a Pull Request 🚀
+
+📜 License
+
+This project is licensed under the MIT License – see the LICENSE file for details.
+🙌 Acknowledgments
+
+    Polygon
+
+Next.js
+
+Tailwind CSS
+
+Gated
+
+BitBadges
+
+WalletConnect
+
+RainbowKit
